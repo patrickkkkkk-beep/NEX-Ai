@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0b12"><title>NEX AI</title>
+<style>
+:root{--bg:#0b0b12;--surface:#12121d;--surface2:#1a1a29;--surface3:#222238;--line:#2b2b43;--text:#f5f3ff;--muted:#aaa8c1;--accent:#8b5cf6;--accent2:#5b8cff;--user:#49328a;--shadow:0 18px 55px #0006;--font:15px;--radius:18px}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:var(--font)}body{background:radial-gradient(ellipse at 10% 0%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 36%),var(--bg)}button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit}.app{max-width:1100px;margin:auto;min-height:100dvh;padding:0 16px;display:flex;flex-direction:column}.topbar{height:72px;display:flex;align-items:center;gap:13px;border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);z-index:5}.iconbtn{width:42px;height:42px;border:1px solid var(--line);border-radius:14px;background:var(--surface);display:grid;place-items:center;font-size:20px;flex:none}.hamburger{order:0}.brand{display:flex;align-items:center;gap:10px;margin-inline-start:auto}.logo{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));font-weight:900;font-size:21px;box-shadow:0 7px 22px color-mix(in srgb,var(--accent) 25%,transparent)}.brand h1{font-size:19px;margin:0;letter-spacing:.3px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:1px}.status{font-size:11px;color:#9be8c4;background:#123329;padding:7px 10px;border-radius:30px;white-space:nowrap}.toolbar{display:flex;align-items:center;gap:10px;padding:13px 0}.model-select{max-width:230px;min-width:0;flex:1;background:var(--surface2);color:var(--text);border:1px solid var(--line);padding:11px 13px;border-radius:13px;outline:none}.newchat{border:1px solid var(--line);background:var(--surface);padding:10px 14px;border-radius:13px}.chat{width:100%;max-width:850px;margin:0 auto;flex:1;min-height:42vh;display:flex;flex-direction:column;gap:14px;padding:20px 0 26px}.welcome{margin:auto;text-align:center;padding:34px 15px;max-width:560px}.welcome-icon{width:66px;height:66px;border-radius:23px;margin:0 auto 15px;display:grid;place-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 30%,var(--surface)),var(--surface2));font-size:32px}.welcome h2{font-size:24px;margin:0 0 9px}.welcome p{color:var(--muted);line-height:1.9;margin:0}.msg{max-width:min(88%,760px);padding:13px 16px;border-radius:18px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 5px 20px #0002}.msg.user{align-self:flex-start;background:var(--user);border-bottom-left-radius:6px}.msg.assistant{align-self:flex-end;background:var(--surface2);border:1px solid var(--line);border-bottom-right-radius:6px}.msg.error{color:#ff9daa;border-color:#743a48}.msg-meta{font-size:10px;color:var(--muted);margin-top:5px}.composer-wrap{position:sticky;bottom:0;padding:12px 0 max(12px,env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 18%);z-index:2}.composer{max-width:850px;margin:auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:9px;box-shadow:var(--shadow);display:flex;align-items:flex-end;gap:9px}.composer textarea{flex:1;min-height:46px;max-height:180px;resize:none;border:0;outline:0;background:transparent;color:var(--text);padding:11px 9px;line-height:1.7}.send{width:46px;height:46px;border:0;border-radius:15px;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:20px;font-weight:bold}.send:disabled{opacity:.55;cursor:wait}.under-composer{max-width:850px;margin:7px auto 0;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px;padding:0 5px}.textbtn{background:none;border:0;color:var(--muted);padding:5px}.footer{text-align:center;color:var(--muted);font-size:10px;padding:5px 0 10px}
+/* drawer and dialogs */
+.overlay{position:fixed;inset:0;background:#0009;z-index:20;opacity:0;visibility:hidden;transition:.2s}.overlay.show{opacity:1;visibility:visible}.drawer{position:fixed;z-index:21;top:0;bottom:0;right:0;width:min(360px,88vw);background:var(--surface);border-left:1px solid var(--line);box-shadow:var(--shadow);transform:translateX(105%);transition:transform .25s;display:flex;flex-direction:column;padding:18px}.drawer.show{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:15px;border-bottom:1px solid var(--line)}.drawer-head strong{font-size:18px}.drawer-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:15px 0}.drawer-action{border:1px solid var(--line);background:var(--surface2);padding:12px;border-radius:13px;text-align:right}.drawer-action span{display:block;font-size:11px;color:var(--muted);margin-top:4px}.history-title{font-size:12px;color:var(--muted);padding:9px 2px}.history-list{overflow:auto;flex:1}.history-item{display:flex;align-items:center;gap:7px;padding:9px;border-radius:13px;margin-bottom:5px;border:1px solid transparent}.history-item.active{background:var(--surface2);border-color:var(--line)}.history-open{min-width:0;flex:1;background:none;border:0;text-align:right;overflow:hidden}.history-name{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}.history-date{display:block;color:var(--muted);font-size:10px;margin-top:3px}.mini-btn{border:0;background:transparent;color:var(--muted);padding:6px;border-radius:8px}.mini-btn:hover{background:var(--surface3);color:var(--text)}.empty-history{text-align:center;color:var(--muted);font-size:12px;padding:28px 8px}.dialog-wrap{position:fixed;inset:0;z-index:30;background:#000a;display:none;align-items:center;justify-content:center;padding:16px}.dialog-wrap.show{display:flex}.dialog{width:min(500px,100%);max-height:88dvh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:19px;box-shadow:var(--shadow)}.dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.dialog-head h2{font-size:18px;margin:0}.setting-group{border-top:1px solid var(--line);padding:14px 0}.setting-group:first-of-type{border-top:0}.setting-label{display:block;font-size:13px;margin-bottom:9px}.setting-help{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:9px 0}.setting-row select,.setting-row input[type=text]{background:var(--surface2);color:var(--text);border:1px solid var(--line);border-radius:11px;padding:9px;max-width:190px}.swatches{display:flex;gap:9px;flex-wrap:wrap}.swatch{width:30px;height:30px;border-radius:50%;border:3px solid var(--surface);outline:1px solid var(--line)}.swatch.selected{outline:2px solid var(--text)}.dialog-btn{border:1px solid var(--line);background:var(--surface2);padding:10px 13px;border-radius:12px}.dialog-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border:0;color:white}.dialog-buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.search-history{width:100%;background:var(--surface2);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:9px}.toast{position:fixed;bottom:100px;left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;z-index:50;background:var(--surface3);border:1px solid var(--line);padding:10px 15px;border-radius:13px;font-size:12px;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+body.compact .msg{padding:9px 12px;line-height:1.65}body.compact .chat{gap:9px}body.light{--bg:#f3f4fa;--surface:#fff;--surface2:#f0eff8;--surface3:#e5e3f1;--line:#d9d7e8;--text:#211d32;--muted:#6f6a83;--user:#ded3ff;--shadow:0 18px 50px #39305a1a;background:radial-gradient(ellipse at 10% 0%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 36%),var(--bg)}body.light .status{color:#176b4b;background:#dff8ec}
+@media(max-width:600px){.app{padding:0 11px}.topbar{height:64px}.status{font-size:10px;padding:6px 8px}.brand h1{font-size:17px}.toolbar{padding:10px 0}.newchat{font-size:12px;padding:10px}.model-select{font-size:12px}.chat{padding-top:13px}.msg{max-width:94%;font-size:14px}.welcome h2{font-size:21px}.under-composer{font-size:10px}}
+</style></head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button class="iconbtn hamburger" id="menuBtn" aria-label="باز کردن منو">☰</button>
+    <div class="brand"><div class="logo">N</div><div><h1>NEX AI</h1><small>دستیار هوشمند با Groq</small></div></div>
+    <div class="status" id="status">در حال اتصال...</div>
+  </header>
+  <div class="toolbar">
+    <select class="model-select" id="model" aria-label="انتخاب مدل">
+      <option value="openai/gpt-oss-120b">GPT OSS 120B</option>
+      <option value="openai/gpt-oss-20b">GPT OSS 20B</option>
+      <option value="llama-3.3-70b-versatile">Llama 3.3 70B</option>
+    </select>
+    <button class="newchat" id="newChat">＋ گفت‌وگوی جدید</button>
+  </div>
+  <main class="chat" id="chat">
+    <section class="welcome" id="welcome"><div class="welcome-icon">✦</div><h2>سلام! آماده‌ای؟</h2><p>من NEX AI هستم. هر چیزی خواستی بپرس تا با هم بررسی کنیم.</p></section>
+  </main>
+  <div class="composer-wrap">
+    <div class="composer"><textarea id="prompt" rows="1" placeholder="پیامت را اینجا بنویس..." aria-label="پیام شما"></textarea><button class="send" id="send" aria-label="ارسال پیام">➤</button></div>
+    <div class="under-composer"><span id="typing">آماده گفت‌وگو</span><button class="textbtn" id="clearCurrent">پاک کردن این گفتگو</button></div>
+  </div>
+  <div class="footer">NEX AI · چت هوشمند</div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="منوی اصلی">
+  <div class="drawer-head"><strong>منوی NEX AI</strong><button class="iconbtn" id="closeMenu" aria-label="بستن">×</button></div>
+  <div class="drawer-actions">
+    <button class="drawer-action" id="drawerNew">＋ گفت‌وگوی جدید<span>شروع یک مکالمه تازه</span></button>
+    <button class="drawer-action" id="openSettings">⚙️ تنظیمات<span>ظاهر و رنگ برنامه</span></button>
+    <button class="drawer-action" id="exportAll">⇩ خروجی تاریخچه<span>ذخیره همه گفتگوها</span></button>
+    <button class="drawer-action" id="importAll">⇧ وارد کردن تاریخچه<span>بازیابی فایل پشتیبان</span></button>
+  </div>
+  <div class="history-title">تاریخچه گفتگوها</div>
+  <input class="search-history" id="historySearch" placeholder="جستجو در گفتگوها..." />
+  <div class="history-list" id="historyList"></div>
+  <div class="setting-help">گفتگوها به‌صورت خودکار در حافظه همین مرورگر ذخیره می‌شوند.</div>
+</aside>
+
+<div class="dialog-wrap" id="settingsDialog">
+  <section class="dialog">
+    <div class="dialog-head"><h2>تنظیمات</h2><button class="iconbtn" data-close="settingsDialog">×</button></div>
+    <div class="setting-group">
+      <label class="setting-label">رنگ اصلی برنامه</label>
+      <div class="swatches" id="swatches">
+        <button class="swatch" data-color="#8b5cf6" style="background:#8b5cf6" aria-label="بنفش"></button>
+        <button class="swatch" data-color="#2585e8" style="background:#2585e8" aria-label="آبی"></button>
+        <button class="swatch" data-color="#0d9488" style="background:#0d9488" aria-label="فیروزه‌ای"></button>
+        <button class="swatch" data-color="#e05a91" style="background:#e05a91" aria-label="صورتی"></button>
+        <button class="swatch" data-color="#d97706" style="background:#d97706" aria-label="نارنجی"></button>
+        <button class="swatch" data-color="#16a34a" style="background:#16a34a" aria-label="سبز"></button>
+      </div>
+    </div>
+    <div class="setting-group">
+      <div class="setting-row"><label for="themeSelect">حالت نمایش</label><select id="themeSelect"><option value="dark">تیره</option><option value="light">روشن</option></select></div>
+      <div class="setting-row"><label for="fontSelect">اندازه نوشته</label><select id="fontSelect"><option value="14px">کوچک</option><option value="15px">معمولی</option><option value="16px">بزرگ</option><option value="17px">خیلی بزرگ</option></select></div>
+      <div class="setting-row"><label for="compactToggle">حالت فشرده گفتگو</label><input type="checkbox" id="compactToggle"></div>
+      <p class="setting-help">تغییرات ظاهر فوراً اعمال و ذخیره می‌شوند.</p>
+    </div>
+    <div class="setting-group">
+      <div class="setting-row"><label>ذخیره‌سازی تاریخچه</label><strong style="font-size:12px;color:#86efac">خودکار و فعال</strong></div>
+      <p class="setting-help">تاریخچه در همین مرورگر و دستگاه ذخیره می‌شود. برای انتقال به دستگاه دیگر از «خروجی تاریخچه» استفاده کن. همگام‌سازی ابری بین دستگاه‌ها فعلاً فعال نیست.</p>
+    </div>
+    <div class="dialog-buttons"><button class="dialog-btn" id="resetSettings">بازنشانی تنظیمات</button><button class="dialog-btn primary" data-close="settingsDialog">تمام</button></div>
+  </section>
+</div>
+<div class="dialog-wrap" id="renameDialog"><section class="dialog"><div class="dialog-head"><h2>تغییر نام گفتگو</h2><button class="iconbtn" data-close="renameDialog">×</button></div><input class="search-history" id="renameInput" maxlength="80" placeholder="نام گفتگو"><div class="dialog-buttons"><button class="dialog-btn primary" id="saveRename">ذخیره نام</button><button class="dialog-btn" data-close="renameDialog">انصراف</button></div></section></div>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const STORE_KEY = 'nex_ai_chats_v2';
+const SETTINGS_KEY = 'nex_ai_settings_v1';
+let chats = [];
+let currentId = null;
+let sending = false;
+let renameTarget = null;
+let toastTimer;
+
+function uid(){return 'chat_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8)}
+function now(){return new Date().toISOString()}
+function escapeText(value){return String(value ?? '')}
+function showToast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2300)}
+function saveChats(){try{localStorage.setItem(STORE_KEY,JSON.stringify(chats))}catch(e){showToast('فضای ذخیره‌سازی مرورگر پر شده است؛ از تاریخچه خروجی بگیر.')}}
+function loadChats(){try{const parsed=JSON.parse(localStorage.getItem(STORE_KEY)||'[]');if(Array.isArray(parsed))chats=parsed.filter(c=>c&&typeof c.id==='string'&&Array.isArray(c.messages)).map(c=>({id:c.id,title:String(c.title||'گفتگوی جدید'),model:String(c.model||'openai/gpt-oss-120b'),createdAt:c.createdAt||now(),updatedAt:c.updatedAt||c.createdAt||now(),messages:c.messages.filter(m=>m&&['user','assistant'].includes(m.role)&&typeof m.content==='string')}));}catch{chats=[]}}
+function currentChat(){return chats.find(c=>c.id===currentId)||null}
+function createChat(){const c={id:uid(),title:'گفتگوی جدید',model:$('model').value,createdAt:now(),updatedAt:now(),messages:[]};chats.unshift(c);currentId=c.id;saveChats();renderChat();renderHistory();closeDrawer();$('prompt').focus();return c}
+function ensureChat(){return currentChat()||createChat()}
+function formatDate(iso){const d=new Date(iso);if(Number.isNaN(d.getTime()))return '';return d.toLocaleString('fa-IR',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}
+function renderChat(){const chat=currentChat();$('chat').innerHTML='';if(!chat||!chat.messages.length){$('chat').innerHTML='<section class="welcome"><div class="welcome-icon">✦</div><h2>سلام! آماده‌ای؟</h2><p>من NEX AI هستم. هر چیزی خواستی بپرس تا با هم بررسی کنیم.</p></section>';return}
+  chat.messages.forEach(m=>{const el=document.createElement('div');el.className='msg '+m.role;el.textContent=m.content;$('chat').appendChild(el)});$('chat').scrollTop=$('chat').scrollHeight;
+}
+function renderHistory(){const q=$('historySearch').value.trim().toLocaleLowerCase();const list=$('historyList');list.innerHTML='';const filtered=chats.filter(c=>!q||c.title.toLocaleLowerCase().includes(q)||c.messages.some(m=>m.content.toLocaleLowerCase().includes(q)));if(!filtered.length){list.innerHTML='<div class="empty-history">'+(chats.length?'موردی پیدا نشد.':'هنوز گفتگویی ذخیره نشده است.')+'</div>';return}
+  filtered.forEach(c=>{const row=document.createElement('div');row.className='history-item'+(c.id===currentId?' active':'');const open=document.createElement('button');open.className='history-open';open.innerHTML='<span class="history-name"></span><span class="history-date"></span>';open.querySelector('.history-name').textContent=c.title;open.querySelector('.history-date').textContent=(c.messages.length+' پیام · '+formatDate(c.updatedAt));open.onclick=()=>{currentId=c.id;$('model').value=c.model;renderChat();renderHistory();closeDrawer()};const rename=document.createElement('button');rename.className='mini-btn';rename.textContent='✎';rename.title='تغییر نام';rename.onclick=()=>openRename(c.id);const del=document.createElement('button');del.className='mini-btn';del.textContent='×';del.title='حذف گفتگو';del.onclick=()=>deleteChat(c.id);row.append(open,rename,del);list.appendChild(row)})
+}
+function addMessage(role,content){const c=ensureChat();const message={role,content,createdAt:now()};c.messages.push(message);c.updatedAt=now();if(role==='user'&&c.title==='گفتگوی جدید'){c.title=content.replace(/\s+/g,' ').slice(0,42)+(content.length>42?'…':'')};saveChats();renderHistory();const el=document.createElement('div');el.className='msg '+role;el.textContent=content;$('chat').appendChild(el);$('chat').scrollTop=$('chat').scrollHeight;return el}
+function openDrawer(){$('drawer').classList.add('show');$('overlay').classList.add('show')}
+function closeDrawer(){$('drawer').classList.remove('show');$('overlay').classList.remove('show')}
+function openDialog(id){$(id).classList.add('show');closeDrawer()}
+function closeDialog(id){$(id).classList.remove('show')}
+function deleteChat(id){const c=chats.find(x=>x.id===id);if(!c)return;if(!confirm('گفتگوی «'+c.title+'» حذف شود؟'))return;chats=chats.filter(x=>x.id!==id);if(currentId===id)currentId=chats[0]?.id||null;saveChats();renderChat();renderHistory();showToast('گفتگو حذف شد')}
+function openRename(id){const c=chats.find(x=>x.id===id);if(!c)return;renameTarget=id;$('renameInput').value=c.title;openDialog('renameDialog');setTimeout(()=>$('renameInput').focus(),50)}
+function saveRename(){const c=chats.find(x=>x.id===renameTarget);const name=$('renameInput').value.trim();if(!c||!name)return;c.title=name;c.updatedAt=now();saveChats();renderHistory();closeDialog('renameDialog');showToast('نام گفتگو تغییر کرد')}
+function exportChats(){const blob=new Blob([JSON.stringify({app:'NEX AI',version:2,exportedAt:now(),chats},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nex-ai-history-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href);showToast('فایل پشتیبان آماده شد')}
+function importChats(file){const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);const incoming=Array.isArray(data)?data:data.chats;if(!Array.isArray(incoming))throw Error('invalid');let added=0;incoming.forEach(c=>{if(c&&Array.isArray(c.messages)&&typeof c.id==='string'&&!chats.some(x=>x.id===c.id)){chats.push({id:c.id,title:String(c.title||'گفتگوی واردشده'),model:String(c.model||'openai/gpt-oss-120b'),createdAt:c.createdAt||now(),updatedAt:c.updatedAt||now(),messages:c.messages.filter(m=>m&&['user','assistant'].includes(m.role)&&typeof m.content==='string')});added++}});chats.sort((a,b)=>new Date(b.updatedAt)-new Date(a.updatedAt));saveChats();currentId=chats[0]?.id||null;renderChat();renderHistory();showToast(added+' گفتگو وارد شد')}catch{showToast('فایل تاریخچه معتبر نیست')}};reader.readAsText(file)}
+async function ping(){try{const r=await fetch('/api/health');const d=await r.json();$('status').textContent=r.ok?(d.configured?'● Groq متصل':'کلید Groq تنظیم نشده'):'خطای سرور';if(!d.configured)$('status').style.color='#fbbf24'}catch{$('status').textContent='سرور در دسترس نیست'}}
+async function send(){if(sending)return;const text=$('prompt').value.trim();if(!text)return;const c=ensureChat();c.model=$('model').value;$('prompt').value='';$('prompt').style.height='46px';addMessage('user',text);sending=true;$('send').disabled=true;$('typing').textContent='در حال دریافت پاسخ از Groq...';const pending=document.createElement('div');pending.className='msg assistant';pending.textContent='در حال فکر کردن...';$('chat').appendChild(pending);$('chat').scrollTop=$('chat').scrollHeight;
+  try{const payload={messages:c.messages.map(m=>({role:m.role,content:m.content})),model:c.model};const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw Error(d.error||'خطای ناشناخته');pending.remove();addMessage('assistant',d.reply)}catch(e){pending.classList.add('error');pending.textContent='خطا: '+e.message;const current=currentChat();if(current&&current.messages.at(-1)?.role==='user'){current.messages.pop();current.updatedAt=now();saveChats();renderHistory()}}finally{sending=false;$('send').disabled=false;$('typing').textContent='آماده گفت‌وگو';$('prompt').focus()}}
+function clearCurrent(){const c=currentChat();if(!c||!c.messages.length){showToast('این گفتگو خالی است');return}if(!confirm('پیام‌های این گفتگو پاک شوند؟'))return;c.messages=[];c.title='گفتگوی جدید';c.updatedAt=now();saveChats();renderChat();renderHistory();showToast('پیام‌های گفتگو پاک شدند')}
+function loadSettings(){let s={};try{s=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')}catch{};const accent=s.accent||'#8b5cf6';document.documentElement.style.setProperty('--accent',accent);document.body.classList.toggle('light',s.theme==='light');document.body.classList.toggle('compact',!!s.compact);document.documentElement.style.setProperty('--font',s.font||'15px');$('themeSelect').value=s.theme||'dark';$('fontSelect').value=s.font||'15px';$('compactToggle').checked=!!s.compact;document.querySelectorAll('.swatch').forEach(b=>b.classList.toggle('selected',b.dataset.color===accent))}
+function saveSettings(){const s={accent:document.documentElement.style.getPropertyValue('--accent')||'#8b5cf6',theme:$('themeSelect').value,font:$('fontSelect').value,compact:$('compactToggle').checked};localStorage.setItem(SETTINGS_KEY,JSON.stringify(s));loadSettings()}
+$('menuBtn').onclick=openDrawer;$('closeMenu').onclick=closeDrawer;$('overlay').onclick=closeDrawer;$('newChat').onclick=createChat;$('drawerNew').onclick=createChat;$('openSettings').onclick=()=>openDialog('settingsDialog');$('send').onclick=send;$('clearCurrent').onclick=clearCurrent;$('clearCurrent').title='پاک کردن پیام‌های همین گفتگو';$('historySearch').addEventListener('input',renderHistory);$('saveRename').onclick=saveRename;$('exportAll').onclick=()=>{exportChats();closeDrawer()};$('importAll').onclick=()=>{$('importFile').click()};$('importFile').onchange=e=>{if(e.target.files[0])importChats(e.target.files[0]);e.target.value='';closeDrawer()};$('prompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});$('prompt').addEventListener('input',()=>{$('prompt').style.height='46px';$('prompt').style.height=Math.min($('prompt').scrollHeight,180)+'px'});document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeDialog(b.dataset.close));document.querySelectorAll('.dialog-wrap').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)closeDialog(d.id)}));document.querySelectorAll('.swatch').forEach(b=>b.onclick=()=>{document.documentElement.style.setProperty('--accent',b.dataset.color);saveSettings()});['themeSelect','fontSelect','compactToggle'].forEach(id=>$(id).addEventListener('change',saveSettings));$('resetSettings').onclick=()=>{localStorage.removeItem(SETTINGS_KEY);loadSettings();showToast('تنظیمات بازنشانی شد')};
+loadChats();loadSettings();if(chats.length){currentId=chats[0].id;$('model').value=currentChat().model}renderChat();renderHistory();ping();
+</script>
+</body></html>
